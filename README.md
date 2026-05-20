@@ -1,20 +1,18 @@
 # Paper Explainer for Students
 
-A tool designed for students to easily upload complex research papers (PDFs) and ask questions to understand them better. Built specifically to run efficiently using local vector embeddings and the free tier of Google's Gemini 1.5 Flash.
+A tool for students to upload research papers (PDFs) and ask questions to make them easier to understand. Built using FastAPI for the backend, Streamlit for the frontend, and Google Gemini for the brain.
 
 ## Tech Stack
 - **Backend:** FastAPI, Uvicorn
 - **Frontend:** Streamlit
-- **LLM Engine:** LangChain, Google Gemini 1.5 Flash
-- **Vector Database:** ChromaDB
-- **Embeddings:** HuggingFace sentence-transformers (Local)
+- **LLM & Embeddings:** Google Gemini 2.5 Flash & gemini-embedding-2
+- **Vector DB:** ChromaDB (queried natively to keep it fast)
+- **PDF Parsing:** PyMuPDF (fast and doesn't crash on complex layouts)
 
 ## Setup Instructions
 
-### 1. Clone or create the project folder
-Navigate to your desired directory and ensure all project files are present.
-
-### 2. Create and activate a virtual environment
+### 1. Set up virtual environment
+Create a Python virtual environment so package dependencies don't conflict:
 ```bash
 python -m venv venv
 # On Windows:
@@ -23,48 +21,38 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-### 3. Install dependencies
+### 2. Install dependencies
+Install all the required Python packages:
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Setup environment variables
+### 3. Setup environment variables
 Copy `.env.example` to `.env` and add your free Gemini API key:
 ```bash
+# Copy the file manually or run:
 cp .env.example .env
 ```
-Get your free API key from [Google AI Studio](https://aistudio.google.com).
+You can get a free API key from [Google AI Studio](https://aistudio.google.com).
 
-### 5. Run the Backend API
-In your first terminal:
+### 4. Run the backend API
+Open a terminal, activate your virtual environment, and run the backend server:
 ```bash
 cd backend
-uvicorn main:app --reload
+python main.py
 ```
 
-### 6. Run the Frontend UI
-Open a second terminal, activate the virtual environment, and run:
+### 5. Run the frontend UI
+Open a second terminal, activate the virtual environment, and start the Streamlit app:
 ```bash
 cd frontend
 streamlit run app.py
 ```
 
-## How to Use
-1. **Upload**: Open the Streamlit web interface and upload a `.pdf` research paper.
-2. **Process**: Click "Process Paper" to chunk the text and create local embeddings.
-3. **Ask**: Type a question about the paper and receive an AI-generated answer with page citations.
-
-## Week 1 Features Implemented
-- Basic FastAPI backend with `/health`, `/upload`, and `/ask` endpoints.
-- Streamlit frontend with a simple, sequential step-by-step UI.
-- Free local embeddings generation using `sentence-transformers`.
-- Integration with Google Gemini free tier via `langchain-google-genai`.
-- Document chunking, persisting to local ChromaDB, and RetrievalQA integration.
-
-## GitHub Commit Checklist
-1. `Initial commit: project structure and requirements`
-2. `feat: add environment config and backend skeleton`
-3. `feat: implement PDF ingestion and ChromaDB vector store`
-4. `feat: implement LangChain QA retrieval with Gemini 1.5 Flash`
-5. `feat: complete FastAPI endpoints and CORS setup`
-6. `feat: add Streamlit frontend with API integration`
+## Features Implemented
+- FastAPI backend endpoints (`/health`, `/upload`, `/ask`).
+- Step-by-step Streamlit interface for uploading and questioning.
+- PyMuPDF to extract text from papers quickly without format crashes.
+- Google Cloud embeddings to keep local RAM usage at 0MB.
+- Native ChromaDB client integration to avoid LangChain wrapper issues.
+- Quick answers using Gemini 2.5 Flash.
