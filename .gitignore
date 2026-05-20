@@ -1,0 +1,35 @@
+# Environment variables 
+.env
+
+# Python venv
+venv/
+env/
+ENV/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# ChromaDB database 
+chroma_db/
+
+# Uploaded PDFs 
+uploads/*.pdf
+
+!uploads/.gitkeep
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

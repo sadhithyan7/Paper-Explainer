@@ -1,0 +1,26 @@
+# backend
+fastapi
+uvicorn
+python-multipart
+
+# frontend
+streamlit>=1.35.0
+
+# ai stuff
+langchain
+langchain-community
+langchain-google-genai
+
+# db
+chromadb
+sentence-transformers
+
+# pdf
+pypdf
+
+# env
+python-dotenv
+requests
+
+# ollama
+langchain-ollama
